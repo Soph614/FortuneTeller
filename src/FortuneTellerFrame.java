@@ -3,27 +3,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
-import java.awt.GraphicsEnvironment;
 
 public class FortuneTellerFrame extends JFrame
 {
+    // initialize panels
     JPanel mainPnl;
     JPanel iconPnl;  // Top
     JPanel displayPnl; // Center
-    JPanel controlPnl; // Bottom
+    JPanel buttonPnl; // Bottom
 
-    JTextArea displayTextArea;
-    JScrollPane scrollbar;
-
+    // initialize icon and label for top panel (iconPanel)
     JLabel titleLabel;
     ImageIcon icon;
 
+    // initialize text area, scrollbar, randomizer,
+    // and arrayList of fortunes for middle panel (displayPanel)
+    JTextArea displayTextArea;
+    JScrollPane scrollbar;
+    Random rnd = new Random();
+    ArrayList<String> fortunes = new ArrayList<>();
+
+    // initialize buttons and label for bottom panel (buttonPanel)
     JButton readFortuneBtn;
     JButton quitBtn;
-
-    Random rnd = new Random();
-
-    ArrayList<String> fortunes = new ArrayList<>();
 
     public static void main (String[] args) {
             JFrame frame = new FortuneTellerFrame();
@@ -46,11 +48,11 @@ public class FortuneTellerFrame extends JFrame
         mainPnl.add(displayPnl, BorderLayout.CENTER);
 
         createControlPanel();
-        mainPnl.add(controlPnl, BorderLayout.SOUTH);
+        mainPnl.add(buttonPnl, BorderLayout.SOUTH);
 
         add(mainPnl);
         setTitle("Fortune Teller");
-        setSize(700, 600);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -81,7 +83,7 @@ public class FortuneTellerFrame extends JFrame
         displayPnl = new JPanel();
         displayTextArea = new JTextArea(10, 50);
         displayTextArea.setEditable(false);
-        displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 12));
+        displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 16));
         scrollbar = new JScrollPane(displayTextArea);
         displayPnl.add(scrollbar);
     }
@@ -89,8 +91,8 @@ public class FortuneTellerFrame extends JFrame
 
     private void createControlPanel()
     {
-        controlPnl = new JPanel();
-        controlPnl.setLayout(new GridLayout(1, 2));
+        buttonPnl = new JPanel();
+        buttonPnl.setLayout(new GridLayout(1, 2));
 
         readFortuneBtn = new JButton("Read My Fortune!");
         readFortuneBtn.addActionListener((ActionEvent ae) ->
@@ -103,8 +105,8 @@ public class FortuneTellerFrame extends JFrame
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
 
-        controlPnl.add(readFortuneBtn);
-        controlPnl.add(quitBtn);
+        buttonPnl.add(readFortuneBtn);
+        buttonPnl.add(quitBtn);
 
     }
 }
