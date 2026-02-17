@@ -22,8 +22,12 @@ public class FortuneTellerFrame extends JFrame
     JScrollPane scrollbar;
     Random rnd = new Random();
     ArrayList<String> fortunes = new ArrayList<>();
+    int index;
+    String fortune;
+    int oldFortune = -1;
+    int newFortune;
 
-    // initialize buttons and label for bottom panel (buttonPanel)
+            // initialize buttons and label for bottom panel (buttonPanel)
     JButton readFortuneBtn;
     JButton quitBtn;
 
@@ -34,10 +38,24 @@ public class FortuneTellerFrame extends JFrame
     public FortuneTellerFrame()
     {
         fortunes.add("Death is in your future.");
-        fortunes.add("A large pepperoni pizza is awaiting you.");
-        fortunes.add("Your next roommate will be very unorganized.");
-        fortunes.add("You need to take a shower more often.");
-        fortunes.add("Your next best friend will listen without saying anything! Aside from a meow here and there.");
+        fortunes.add("Pizza is awaiting you.");
+        fortunes.add("You should take a shower.");
+        fortunes.add("Avoid it, pass not by it, turn from it, and pass away.");
+        fortunes.add("The candle of the wicked shall be put out.");
+        fortunes.add("Though thou shouldest bray a fool in a mortar among wheat with a pestle, yet will not his foolishness depart from him.");
+        fortunes.add("The years of the wicked shall be shortened.");
+        fortunes.add("A man of great wrath shall suffer punishment.");
+        fortunes.add("Correct thy son, and he shall give thee rest.");
+        fortunes.add("A man of understanding shall attain unto wise counsels.");
+        fortunes.add("A prating fool shall fall.");
+        fortunes.add("He that is surety for a stranger shall smart for it.");
+        fortunes.add("The liberal soul shall be made fat.");
+        fortunes.add("He that trusteth in his riches shall fall.");
+        fortunes.add("The fool shall be servant to the wise of heart.");
+        fortunes.add("A wise man will hear, and will increase learning.");
+        fortunes.add("The LORD will not suffer the soul of the righteous to famish.");
+        fortunes.add("The LORD will destroy the house of the proud.");
+
         mainPnl = new JPanel();
         mainPnl.setLayout(new BorderLayout());
 
@@ -97,9 +115,13 @@ public class FortuneTellerFrame extends JFrame
         readFortuneBtn = new JButton("Read My Fortune!");
         readFortuneBtn.addActionListener((ActionEvent ae) ->
         {
-            int index = rnd.nextInt(fortunes.size());
-            String fortune = fortunes.get(index);
-            displayTextArea.append(fortune +"\n");
+            do {
+                index = rnd.nextInt(fortunes.size());
+                fortune = fortunes.get(index);
+                newFortune = index;
+            } while (oldFortune == newFortune);
+            oldFortune = index;
+            displayTextArea.append(fortune + "\n");
         });
 
         quitBtn = new JButton("Quit");
