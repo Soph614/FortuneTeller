@@ -6,17 +6,17 @@ import java.util.Random;
 
 public class FortuneTellerFrame extends JFrame
 {
-    // initialize panels
+    // declare panels
     JPanel mainPnl;
     JPanel iconPnl;  // Top
     JPanel displayPnl; // Center
     JPanel buttonPnl; // Bottom
 
-    // initialize icon and label for top panel (iconPanel)
+    // declare icon and label for top panel (iconPanel)
     JLabel titleLabel;
     ImageIcon icon;
 
-    // initialize text area, scrollbar, randomizer,
+    // declare text area, scrollbar, randomizer,
     // and arrayList of fortunes for middle panel (displayPanel)
     JTextArea displayTextArea;
     JScrollPane scrollbar;
@@ -27,16 +27,18 @@ public class FortuneTellerFrame extends JFrame
     int oldFortune = -1;
     int newFortune;
 
-            // initialize buttons and label for bottom panel (buttonPanel)
+    // declare buttons and label for bottom panel (buttonPanel)
     JButton readFortuneBtn;
     JButton quitBtn;
 
+    // here's the code that runs the Fortune Teller
     public static void main (String[] args) {
             JFrame frame = new FortuneTellerFrame();
     }
 
-    public FortuneTellerFrame()
-    {
+    // here's the main method which pulls the other methods together
+    public FortuneTellerFrame() {
+        // make fortunes
         fortunes.add("Death is in your future.");
         fortunes.add("Pizza is awaiting you.");
         fortunes.add("You should take a shower.");
@@ -56,23 +58,27 @@ public class FortuneTellerFrame extends JFrame
         fortunes.add("The LORD will not suffer the soul of the righteous to famish.");
         fortunes.add("The LORD will destroy the house of the proud.");
 
+        // initialize mainPnl and set layout to borderLayout
         mainPnl = new JPanel();
         mainPnl.setLayout(new BorderLayout());
 
+        // run method that creates the icon panel and add it to the main panel
         createIconPanel();
         mainPnl.add(iconPnl, BorderLayout.NORTH);
 
+        // run method that creates the display panel (with a text area) and add it to the main panel
         createDisplayPanel();
         mainPnl.add(displayPnl, BorderLayout.CENTER);
 
+        // run method that creates the control panel (with buttons) and add it to the main panel
         createControlPanel();
         mainPnl.add(buttonPnl, BorderLayout.SOUTH);
 
-        add(mainPnl);
-        setTitle("Fortune Teller");
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        add(mainPnl);                                   // add the main panel to a JFrame entitled "Fortune Teller"
+        setTitle("Fortune Teller");                     // give JFrame a title
+        setSize(800, 600);                 // give JFrame a size
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // make sure the program ends when the user closes the JFrame
+        setVisible(true); // make JFrame visible
     }
 
     private void createIconPanel()
