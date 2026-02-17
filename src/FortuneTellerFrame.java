@@ -73,11 +73,22 @@ public class FortuneTellerFrame extends JFrame
         createControlPanel();
         mainPnl.add(buttonPnl, BorderLayout.SOUTH);
 
-        add(mainPnl);                                   // add the main panel to a JFrame entitled "Fortune Teller"
-        setTitle("Fortune Teller");                     // give JFrame a title
-        setSize(800, 650);                 // give JFrame a size
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // make sure the program ends when the user closes the JFrame
-        setVisible(true);                               // make JFrame visible
+        add(mainPnl); // add the main panel to a JFrame entitled "Fortune Teller"
+        {
+            // CENTER FRAME IN SCREEN...CODE ADAPTED FROM CAY HORSTMANN
+            Toolkit kit = Toolkit.getDefaultToolkit();                                  // getting toolkit from system and naming it "kit"
+            Dimension screenSize = kit.getScreenSize();                                 // getting screen size from toolkit
+            int screenHeight = screenSize.height;                                       // getting height from screen size and naming it "screenHeight"
+            int screenWidth = screenSize.width;                                         // getting width from screen size and naming it "screenWidth"
+
+            setSize(screenWidth / 2, screenHeight / 2);                    // setting JFrame size to half of screen width and half of screen height
+            setLocation(screenWidth / 4, screenHeight / 4);                       // positioning JFrame
+
+
+            setTitle("Fortune Teller");                                                 // name JFrame Fortune Teller
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                             // make program end when user closes JFramee
+            setVisible(true);                                                           // make JFrame visible
+        }
     }
 
     private void createIconPanel()
@@ -103,7 +114,7 @@ public class FortuneTellerFrame extends JFrame
     private void createDisplayPanel()
     {
         displayPnl = new JPanel();                                                  // initialize display panel
-        displayTextArea = new JTextArea(10, 40);                      // set size of display -- is dependent on font and size of font!
+        displayTextArea = new JTextArea(4, 40);                       // set size of display -- is dependent on font and size of font!
         displayTextArea.setEditable(false);                                         // make sure the user can't edit the display
         displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 20)); // set font, font style, and font size for display
         scrollbar = new JScrollPane(displayTextArea);                               // make the display scrollable
@@ -134,5 +145,27 @@ public class FortuneTellerFrame extends JFrame
         // add the buttons to the button panel
         buttonPnl.add(readFortuneBtn);
         buttonPnl.add(quitBtn);
+    }
+
+    // adapted code from Cay Horstmann
+    static class CenteredFrame extends JFrame {
+        public CenteredFrame() {
+            // get screen dimensions
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = kit.getScreenSize();
+            int screenHeight = screenSize.height;
+            int screenWidth = screenSize.width;
+
+            // center frame in screen
+            setSize(screenWidth / 2, screenHeight / 2);
+            setLocation(screenWidth / 4, screenHeight / 4);
+
+            // set frame icon and title
+            Image img = kit.getImage("icon.gif");
+            setIconImage(img);
+            setTitle("CenteredFrame");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(true);
+        }
     }
 }
