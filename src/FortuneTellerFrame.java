@@ -8,16 +8,15 @@ public class FortuneTellerFrame extends JFrame
 {
     // declare panels
     JPanel mainPnl;
-    JPanel iconPnl;  // Top
-    JPanel displayPnl; // Center
-    JPanel buttonPnl; // Bottom
+    JPanel iconPnl;     // will be top panel
+    JPanel displayPnl;  // will be center panel
+    JPanel buttonPnl;   // will be bottom panel
 
-    // declare icon and label for top panel (iconPanel)
+    // declare variables for top panel (iconPanel)
     JLabel titleLabel;
     ImageIcon icon;
 
-    // declare text area, scrollbar, randomizer,
-    // and arrayList of fortunes for middle panel (displayPanel)
+    // declare variables for middle panel (displayPnl)
     JTextArea displayTextArea;
     JScrollPane scrollbar;
     Random rnd = new Random();
@@ -27,11 +26,11 @@ public class FortuneTellerFrame extends JFrame
     int oldFortune = -1;
     int newFortune;
 
-    // declare buttons and label for bottom panel (buttonPanel)
+    // declare variables for bottom panel (buttonPnl)
     JButton readFortuneBtn;
     JButton quitBtn;
 
-    // here's the code that runs the Fortune Teller
+    // HERE'S THE CODE THAT RUNS THE FORTUNE TELLER
     public static void main (String[] args) {
             JFrame frame = new FortuneTellerFrame();
     }
@@ -76,9 +75,9 @@ public class FortuneTellerFrame extends JFrame
 
         add(mainPnl);                                   // add the main panel to a JFrame entitled "Fortune Teller"
         setTitle("Fortune Teller");                     // give JFrame a title
-        setSize(800, 600);                 // give JFrame a size
+        setSize(800, 650);                 // give JFrame a size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // make sure the program ends when the user closes the JFrame
-        setVisible(true); // make JFrame visible
+        setVisible(true);                               // make JFrame visible
     }
 
     private void createIconPanel()
@@ -87,54 +86,53 @@ public class FortuneTellerFrame extends JFrame
         icon = new ImageIcon("src/fortuneTellerImage.jpg");
 
         // HAVE TO RESIZE THE IMAGE
-        // Got idea from trolologuy, https://stackoverflow.com/a/18335435 on 02/16/2026 License - CC BY-SA 3.0
+        // got idea from trolologuy, https://stackoverflow.com/a/18335435 on 02/16/2026... License - CC BY-SA 3.0
         Image tooBigImage = icon.getImage();
         Image smallerImage = tooBigImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
         icon = new ImageIcon(smallerImage);
         // resizing complete
 
-        titleLabel = new JLabel("Fortune Teller", icon, JLabel.CENTER);
-        titleLabel.setFont(new Font("Chalkduster", Font.PLAIN, 34));
-        // Obscure code to align the text to the Icon!
-        titleLabel.setVerticalTextPosition(JLabel.BOTTOM);
-        titleLabel.setHorizontalTextPosition(JLabel.CENTER);
+        titleLabel = new JLabel("Fortune Teller", icon, JLabel.CENTER);        // give the icon a label
+        titleLabel.setFont(new Font("Chalkduster", Font.PLAIN, 34));     // make the label authentic
+        titleLabel.setVerticalTextPosition(JLabel.TOP);                             // label goes to top
+        titleLabel.setHorizontalTextPosition(JLabel.CENTER);                        // label gets centered in the screen
 
-        iconPnl.add(titleLabel);
+        iconPnl.add(titleLabel);                                                    // add label to icon panel
     }
 
     private void createDisplayPanel()
     {
-        displayPnl = new JPanel();
-        displayTextArea = new JTextArea(10, 50);
-        displayTextArea.setEditable(false);
-        displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 16));
-        scrollbar = new JScrollPane(displayTextArea);
-        displayPnl.add(scrollbar);
+        displayPnl = new JPanel();                                                  // initialize display panel
+        displayTextArea = new JTextArea(10, 40);                      // set size of display -- is dependent on font and size of font!
+        displayTextArea.setEditable(false);                                         // make sure the user can't edit the display
+        displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 20)); // set font, font style, and font size for display
+        scrollbar = new JScrollPane(displayTextArea);                               // make the display scrollable
+        displayPnl.add(scrollbar);                                                  // add scrollbar to display panel
     }
 
 
     private void createControlPanel()
     {
-        buttonPnl = new JPanel();
-        buttonPnl.setLayout(new GridLayout(1, 2));
+        buttonPnl = new JPanel();                                                   // initialize button panel
+        buttonPnl.setLayout(new GridLayout(1, 2));                       // set layout for border panel to a grid layout
 
-        readFortuneBtn = new JButton("Read My Fortune!");
-        readFortuneBtn.addActionListener((ActionEvent ae) ->
-        {
-            do {
-                index = rnd.nextInt(fortunes.size());
-                fortune = fortunes.get(index);
-                newFortune = index;
-            } while (oldFortune == newFortune);
-            oldFortune = index;
-            displayTextArea.append(fortune + "\n");
+        readFortuneBtn = new JButton("Read My Fortune!");                      // title the fortune button
+        readFortuneBtn.addActionListener((ActionEvent ae) -> {                      // make the button clickable
+            do {                                                                    // this is a loop to make sure no fortune is printed twice IN A ROW
+                index = rnd.nextInt(fortunes.size());                               // collect a random integer no bigger than the size of the fortunes ArrayList and name it "index"
+                fortune = fortunes.get(index);                                      // get that number fortune from ArrayList of fortunes and set it to variable "fortune"
+                newFortune = index;                                                 // assign that index number to integer "newFortune"
+            } while (oldFortune == newFortune);                                     // this will keep looping until it gets a new fortune that doesn't match the old fortune
+            oldFortune = index;                                                     // assign old index number to "oldFortune"
+            displayTextArea.append(fortune + "\n");                                 // display this fortune in the display text area, and move cursor to a new line so  next fortune doesn't get displayed on the same line
         });
 
+        // make the quit button actionable
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
 
+        // add the buttons to the button panel
         buttonPnl.add(readFortuneBtn);
         buttonPnl.add(quitBtn);
-
     }
 }
