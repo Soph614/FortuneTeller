@@ -43,7 +43,6 @@ public class FortuneTellerFrame extends JFrame
         fortunes.add("You should take a shower.");
         fortunes.add("Avoid it, pass not by it, turn from it, and pass away.");
         fortunes.add("The candle of the wicked shall be put out.");
-        fortunes.add("Though thou shouldest bray a fool in a mortar among wheat with a pestle, yet will not his foolishness depart from him.");
         fortunes.add("The years of the wicked shall be shortened.");
         fortunes.add("A man of great wrath shall suffer punishment.");
         fortunes.add("Correct thy son, and he shall give thee rest.");
@@ -54,7 +53,6 @@ public class FortuneTellerFrame extends JFrame
         fortunes.add("He that trusteth in his riches shall fall.");
         fortunes.add("The fool shall be servant to the wise of heart.");
         fortunes.add("A wise man will hear, and will increase learning.");
-        fortunes.add("The LORD will not suffer the soul of the righteous to famish.");
         fortunes.add("The LORD will destroy the house of the proud.");
 
         // initialize mainPnl and set layout to borderLayout
@@ -81,8 +79,8 @@ public class FortuneTellerFrame extends JFrame
             int screenHeight = screenSize.height;                                       // getting height from screen size and naming it "screenHeight"
             int screenWidth = screenSize.width;                                         // getting width from screen size and naming it "screenWidth"
 
-            setSize(screenWidth / 2, screenHeight / 2);                    // setting JFrame size to half of screen width and half of screen height
-            setLocation(screenWidth / 4, screenHeight / 4);                       // positioning JFrame
+            setSize(screenWidth * 3/4, screenHeight * 3/4);                // setting JFrame size to half of screen width and half of screen height
+            setLocation(screenWidth / 8, screenHeight / 8);                       // positioning JFrame
 
 
             setTitle("Fortune Teller");                                                 // name JFrame Fortune Teller
@@ -94,18 +92,18 @@ public class FortuneTellerFrame extends JFrame
     private void createIconPanel()
     {
         iconPnl = new JPanel();
-        icon = new ImageIcon("src/fortuneTellerImage.jpg");
+        icon = new ImageIcon("src/FortuneTeller.jpg");
 
         // HAVE TO RESIZE THE IMAGE
         // got idea from trolologuy, https://stackoverflow.com/a/18335435 on 02/16/2026... License - CC BY-SA 3.0
         Image tooBigImage = icon.getImage();
-        Image smallerImage = tooBigImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        Image smallerImage = tooBigImage.getScaledInstance(550, 550, Image.SCALE_DEFAULT);
         icon = new ImageIcon(smallerImage);
         // resizing complete
 
         titleLabel = new JLabel("Fortune Teller", icon, JLabel.CENTER);        // give the icon a label
-        titleLabel.setFont(new Font("Chalkduster", Font.PLAIN, 34));     // make the label authentic
-        titleLabel.setVerticalTextPosition(JLabel.TOP);                             // label goes to top
+        titleLabel.setFont(new Font("Didot", Font.PLAIN, 34));           // make the label authentic
+        titleLabel.setVerticalTextPosition(JLabel.BOTTOM);                          // label goes to bottom
         titleLabel.setHorizontalTextPosition(JLabel.CENTER);                        // label gets centered in the screen
 
         iconPnl.add(titleLabel);                                                    // add label to icon panel
@@ -114,7 +112,7 @@ public class FortuneTellerFrame extends JFrame
     private void createDisplayPanel()
     {
         displayPnl = new JPanel();                                                  // initialize display panel
-        displayTextArea = new JTextArea(4, 40);                       // set size of display -- is dependent on font and size of font!
+        displayTextArea = new JTextArea(5, 35);                       // set size of display -- is dependent on font and size of font!
         displayTextArea.setEditable(false);                                         // make sure the user can't edit the display
         displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 20)); // set font, font style, and font size for display
         scrollbar = new JScrollPane(displayTextArea);                               // make the display scrollable
@@ -145,27 +143,5 @@ public class FortuneTellerFrame extends JFrame
         // add the buttons to the button panel
         buttonPnl.add(readFortuneBtn);
         buttonPnl.add(quitBtn);
-    }
-
-    // adapted code from Cay Horstmann
-    static class CenteredFrame extends JFrame {
-        public CenteredFrame() {
-            // get screen dimensions
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Dimension screenSize = kit.getScreenSize();
-            int screenHeight = screenSize.height;
-            int screenWidth = screenSize.width;
-
-            // center frame in screen
-            setSize(screenWidth / 2, screenHeight / 2);
-            setLocation(screenWidth / 4, screenHeight / 4);
-
-            // set frame icon and title
-            Image img = kit.getImage("icon.gif");
-            setIconImage(img);
-            setTitle("CenteredFrame");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setVisible(true);
-        }
     }
 }
