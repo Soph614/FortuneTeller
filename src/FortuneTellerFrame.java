@@ -31,11 +31,16 @@ public class FortuneTellerFrame extends JFrame
     JButton quitBtn;
 
     // HERE'S THE CODE THAT RUNS THE FORTUNE TELLER
-    public static void main (String[] args) {
-            JFrame frame = new FortuneTellerFrame();
+    public static void main(String[] args)
+    {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new FortuneTellerFrame();
+            }
+        });
     }
 
-    // here's the main method which pulls the other methods together
     public FortuneTellerFrame() {
         // make fortunes
         fortunes.add("Death is in your future.");
