@@ -97,7 +97,7 @@ public class FortuneTellerFrame extends JFrame
         // HAVE TO RESIZE THE IMAGE
         // got idea from trolologuy, https://stackoverflow.com/a/18335435 on 02/16/2026... License - CC BY-SA 3.0
         Image tooBigImage = icon.getImage();
-        Image smallerImage = tooBigImage.getScaledInstance(550, 550, Image.SCALE_DEFAULT);
+        Image smallerImage = tooBigImage.getScaledInstance(530, 530, Image.SCALE_DEFAULT);
         icon = new ImageIcon(smallerImage);
         // resizing complete
 
@@ -112,7 +112,7 @@ public class FortuneTellerFrame extends JFrame
     private void createDisplayPanel()
     {
         displayPnl = new JPanel();                                                  // initialize display panel
-        displayTextArea = new JTextArea(5, 35);                       // set size of display -- is dependent on font and size of font!
+        displayTextArea = new JTextArea(6, 30);                       // set size of display -- is dependent on font and size of font!
         displayTextArea.setEditable(false);                                         // make sure the user can't edit the display
         displayTextArea.setFont(new Font("Herculanum", Font.PLAIN, 20)); // set font, font style, and font size for display
         scrollbar = new JScrollPane(displayTextArea);                               // make the display scrollable
@@ -123,9 +123,9 @@ public class FortuneTellerFrame extends JFrame
     private void createControlPanel()
     {
         buttonPnl = new JPanel();                                                   // initialize button panel
-        buttonPnl.setLayout(new GridLayout(1, 2));                       // set layout for border panel to a grid layout
 
         readFortuneBtn = new JButton("Read My Fortune!");                      // title the fortune button
+        readFortuneBtn.setFont(new Font("Copperplate", Font.PLAIN, 12)); // set font to "Copperplate"
         readFortuneBtn.addActionListener((ActionEvent ae) -> {                      // make the button clickable
             do {                                                                    // this is a loop to make sure no fortune is printed twice IN A ROW
                 index = rnd.nextInt(fortunes.size());                               // collect a random integer no bigger than the size of the fortunes ArrayList and name it "index"
@@ -136,8 +136,9 @@ public class FortuneTellerFrame extends JFrame
             displayTextArea.append(fortune + "\n");                                 // display this fortune in the display text area, and move cursor to a new line so  next fortune doesn't get displayed on the same line
         });
 
-        // make the quit button actionable
+        // make the quit button actionable and set font, font style, and font size
         quitBtn = new JButton("Quit");
+        quitBtn.setFont(new Font("Copperplate", Font.PLAIN, 12));
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
 
         // add the buttons to the button panel
